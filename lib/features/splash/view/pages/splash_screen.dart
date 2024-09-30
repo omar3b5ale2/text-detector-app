@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:textdetection/core/constant/app_constants.dart';
+import 'package:textdetection/core/constant/assets.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
@@ -11,7 +13,8 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/png/Detective Logo.png'), // Replace with your logo image path
+            Image.asset(
+                AppAssets.detectiveLogo), // Replace with your logo image path
             const SizedBox(height: 20),
             const Text(
               AppConstants.appName,
