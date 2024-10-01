@@ -1,4 +1,4 @@
-package com.example.textdetection
+package com.maro.textdetection
 
 import io.flutter.embedding.android.FlutterActivity
 
