@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constant/app_constants.dart';
-import '../../../../core/constant/assets.dart';
-import '../../../../core/constant/text_style.dart';
+import 'package:textdetection/core/constant/app_constants.dart';
+import 'package:textdetection/core/constant/assets.dart';
+import 'package:textdetection/core/constant/text_style.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

@@ -1,40 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:textdetection/core/constant/colors.dart';
-import 'package:textdetection/features/auth/view/pages/register_screen.dart';
 
 import '../widgets/custom_text_form_field.dart';
 
 late double screenWidth;
 late double textScaleFactor;
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // scaleFactor = MediaQuery.of(context).size.width / 100;
-    // screenWidth = MediaQuery.of(context).size.width;
-    // textScaleFactor = MediaQuery.of(context).size.height / 48;
-    // var devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     print("---------------------------");
     print(
         '${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}');
 
     /// TODO validation
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    final usernameController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+    final confirmController = TextEditingController();
 
     return ScreenUtilInit(
       builder: (context, child) => SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+          ),
           backgroundColor: AppColors.lightBrown,
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 60.w),
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
             child: Column(
               children: [
                 Text(
-                  "Welcome back! Glad to see you, Again!",
+                  "Hello! Register to get started",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 32.w,
@@ -42,31 +43,49 @@ class LoginScreen extends StatelessWidget {
                 ),
                 32.verticalSpace,
                 CustomTextFormField(
+                  hint: "Username",
+                  controller: usernameController,
+                ),
+                12.verticalSpace,
+                CustomTextFormField(
                   hint: "Enter your email and Phone Num.",
                   controller: emailController,
                 ),
                 12.verticalSpace,
                 CustomTextFormField(
                   hint: "Enter your password",
-                  controller: passwordController,
                   isPassword: true,
+                  controller: passwordController,
                 ),
-                19.verticalSpace,
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    // TODO forgot screen
-                    onTap: () {},
-                    child: Text(
-                      "Forgot Password?",
-                      style: TextStyle(fontSize: 16.w),
-                    ),
-                  ),
+                12.verticalSpace,
+                CustomTextFormField(
+                  hint: "Confirm password",
+                  isPassword: true,
+                  controller: confirmController,
                 ),
                 32.verticalSpace,
                 MaterialButton(
-                  /// TODO login
-                  onPressed: () {},
+                  /// TODO Register validations
+                  onPressed: () async {
+                    try {
+                      await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passwordController.text)
+                          .then(
+                        (value) {
+                          print(value);
+                          print("");
+                          print(value.additionalUserInfo);
+                          print(value.credential);
+                          print(value.user);
+                        },
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      print("Auth Error: $e");
+                    }
+                    print("Current User :${FirebaseAuth.instance.currentUser}");
+                  },
                   color: AppColors.cornFlowerPrimary,
                   height: 48.w,
                   minWidth: double.maxFinite,
@@ -74,21 +93,18 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.w)),
                   textColor: Colors.white,
                   child: Text(
-                    "Login",
+                    "Register",
                     style: TextStyle(fontSize: 16.w),
                   ),
                 ),
+                12.verticalSpace,
               ],
             ),
           ),
           resizeToAvoidBottomInset: false,
           floatingActionButton: InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisterScreen(),
-                  ));
+              Navigator.pop(context);
             },
             child: RichText(
                 text: TextSpan(
@@ -98,9 +114,9 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.black,
                     ),
                     children: [
-                  TextSpan(text: "Don’t have an account? "),
+                  TextSpan(text: "Already have an account? "),
                   TextSpan(
-                      text: "Register Now",
+                      text: "Login Now",
                       style: TextStyle(color: AppColors.cornFlowerPrimary)),
                 ])),
           ),

@@ -1,9 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:textdetection/features/auth/view/pages/login_screen.dart';
+import 'firebase_options.dart';
 
-import 'features/splash/view/pages/splash_screen.dart';
-
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ).then(
+    (value) {
+      print("Firebase.initialized");
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,9 +26,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      home: const LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
