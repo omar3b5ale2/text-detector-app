@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:textdetection/core/constant/colors.dart';
@@ -66,6 +65,8 @@ class RegisterScreen extends StatelessWidget {
                 32.verticalSpace,
                 MaterialButton(
                   /// TODO Register validations
+                  onPressed: () {},
+                  /*
                   onPressed: () async {
                     try {
                       await FirebaseAuth.instance
@@ -86,6 +87,8 @@ class RegisterScreen extends StatelessWidget {
                     }
                     print("Current User :${FirebaseAuth.instance.currentUser}");
                   },
+                  */
+
                   color: AppColors.cornFlowerPrimary,
                   height: 48.w,
                   minWidth: double.maxFinite,

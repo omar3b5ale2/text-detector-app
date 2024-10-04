@@ -1,11 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:textdetection/features/auth/view/pages/login_screen.dart';
-import 'firebase_options.dart';
 
-Future<void> main() async {
+void main() {
   runApp(const MyApp());
 
+  /*
+ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then(
@@ -13,6 +13,7 @@ Future<void> main() async {
       print("Firebase.initialized");
     },
   );
+   */
 }
 
 class MyApp extends StatelessWidget {
