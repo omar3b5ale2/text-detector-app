@@ -2,6 +2,19 @@ firebase.json
 /android/app/google-services.json
 /lib/firebase_options.dart
 
+# ignore all except "lib" folder
+android/*
+.idea/*
+.dart_tool/*
+build/*
+ios/*
+.env
+.metadata
+analysis_options.yaml
+#pubspec.lock
+#pubspec.yaml
+################################
+
 # Miscellaneous
 *.class
 *.log
